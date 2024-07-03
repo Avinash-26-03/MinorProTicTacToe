@@ -16,6 +16,10 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 h1 {
@@ -27,11 +31,15 @@ h1 {
 
 .mode-buttons {
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .mode-buttons button,
-#restart-game {
-    margin: 0 10px;
+#restart-game,
+#select-mode {
+    margin: 10px;
     padding: 10px 20px;
     font-size: 16px;
     border: none;
@@ -43,7 +51,8 @@ h1 {
 }
 
 .mode-buttons button:hover,
-#restart-game:hover {
+#restart-game:hover,
+#select-mode:hover {
     background: #EEEEEE;
     color: #00ADB5;
     transform: translateY(-3px);
@@ -58,16 +67,17 @@ h1 {
 
 .game-board {
     display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     justify-content: center;
+    align-items: center;
     margin: 20px 0;
+    width: 100%;
+    max-width: 300px; /* Set a max-width to maintain the board size */
 }
 
 .cell {
-    width: 100px;
-    height: 100px;
+    aspect-ratio: 1; /* Maintain the square aspect ratio */
     background-color: rgba(255, 255, 255, 0.2);
     display: flex;
     justify-content: center;
@@ -87,6 +97,12 @@ h1 {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.7);
 }
 
+.cell.x, .cell.o {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .cell.x {
     color: #ffffff;
 }
@@ -102,35 +118,44 @@ h1 {
     color: #EEEEEE;
 }
 
-
 .cell.win {
     background-color: #00FF00 !important;
     color: #000000 !important;
     transform: scale(1.1);
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+        padding: 10px;
+    }
 
-#select-mode {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    background: #00ADB5;
-    color: #222831;
-    cursor: pointer;
-    transition: background 0.3s, color 0.3s, transform 0.3s;
-    align-self: center; 
-}
+    h1 {
+        font-size: 2em;
+    }
 
-#select-mode:hover {
-    background: #EEEEEE;
-    color: #00ADB5;
-    transform: translateY(-3px);
+    .mode-buttons button,
+    #restart-game,
+    #select-mode {
+        font-size: 14px;
+        padding: 8px 16px;
+        margin: 5px;
+    }
+
+    #current-mode {
+        font-size: 1em;
+    }
+
+    .game-board {
+        gap: 5px;
+    }
+
+    .cell {
+        font-size: 1.5em;
+    }
+
+    #status {
+        font-size: 1em;
+    }
 }
